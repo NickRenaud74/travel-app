@@ -1,0 +1,19 @@
+{
+  "name": "travelapp",
+  "version": "1.0.0",
+  "description": "Travel App to hold information on users travel plans",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NickRenaud74/travelApp.git"
+  },
+  "author": "Nick Renaud",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NickRenaud74/travelApp/issues"
+  },
+  "homepage": "https://github.com/NickRenaud74/travelApp#readme"
+}

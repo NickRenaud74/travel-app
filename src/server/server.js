@@ -14,7 +14,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static('index.html'));
+app.use(express.static('dist'));
 
 // port and server connection
 const port = '8000';
@@ -24,7 +24,7 @@ const server = app.listen(port, () => {
 });
 
 app.get('/', (req, res) => {
-    res.sendFile('C:/UDAC - FrontEnd/travelApp/src/client/views/index.html');
+    res.sendFile('dist/index.html');
 })
 
 // Get Route

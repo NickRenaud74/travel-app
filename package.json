@@ -1,19 +1,25 @@
 {
-  "name": "travelapp",
-  "version": "1.0.0",
-  "description": "Travel App to hold information on users travel plans",
-  "main": "index.js",
-  "scripts": {
-    "test": "test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NickRenaud74/travelApp.git"
-  },
-  "author": "Nick Renaud",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/NickRenaud74/travelApp/issues"
-  },
-  "homepage": "https://github.com/NickRenaud74/travelApp#readme"
+    "name": "travelapp",
+    "version": "1.0.0",
+    "description": "Travel App to hold information on users travel plans",
+    "main": "index.js",
+    "scripts": {
+        "test": "test",
+        "start": "node src/server/server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/NickRenaud74/travelApp.git"
+    },
+    "author": "Nick Renaud",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/NickRenaud74/travelApp/issues"
+    },
+    "homepage": "https://github.com/NickRenaud74/travelApp#readme",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1"
+    }
 }

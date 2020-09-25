@@ -1,1 +1,5 @@
-alert('I exist')
+import { getData } from './js/geonames';
+
+export {
+    getData
+}

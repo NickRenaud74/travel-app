@@ -16,18 +16,6 @@ const postGeo = async(url = '', data = {}) => {
     };
 };
 
-const getData = event => {
-    event.preventDefault();
-    let place = document.getElementById('destination').value;
-
-    postGeo('/geonames', {
-        destination: place
-    });
-};
-
-//Event listener triggered on submitting form
-document.getElementById('submit').addEventListener('click', getData);
-
 export {
-    getData
+    postGeo
 }

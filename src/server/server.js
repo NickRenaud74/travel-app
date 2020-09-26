@@ -44,16 +44,37 @@ app.get('/projectData', (req, res) => {
 const geoUrl = 'http://api.geonames.org/searchJSON?';
 const username = process.env.geoUsername;
 
+//Weatherbit API data
+const weatherUrl = 'http://api.weatherbit.io/v2.0/forecast/daily?';
+const weatherApi = process.env.weatherApi;
+
 //request to Geonames API with placename
 const getCoords = async(req, res) => {
     const input = req.body.destination;
-    const response = await fetch(`${geoUrl}q=${input}&maxRows=10&username=${username}`);
+    const response = await fetch(`${geoUrl}q=${input}&maxRows=5&username=${username}`);
     try {
         const geoData = await response.json();
-        console.log(geoData);
+        res.send(geoData);
     } catch (error) {
         console.log(error);
     };
 };
 
 app.post('/geonames', getCoords);
+
+//request to Weatherbit API with coordinates passed from Geonames
+const getWeather = async(req, res) => {
+    const lng = req.body.lng;
+    const lat = req.body.lat;
+
+    const response = await fetch(`${weatherUrl}&lat=${lat}&lon=${lng}&key=${weatherApi}`);
+    try {
+        const weatherData = await response.json();
+        console.log(weatherData);
+        res.send(weatherData);
+    } catch (error) {
+        console.log(error);
+    };
+};
+
+app.post('/weather', getWeather);

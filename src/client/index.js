@@ -1,4 +1,4 @@
-import { getData } from './js/handleForm';
+import { getData } from './js/handleData';
 
 export {
     getData

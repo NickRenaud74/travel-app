@@ -1,4 +1,4 @@
-import { getData } from './js/geonames';
+import { getData } from './js/handleForm';
 
 export {
     getData

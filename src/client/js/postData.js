@@ -1,5 +1,5 @@
 //Post request to /geonames route on server.js
-const postGeo = async(url = '', data = {}) => {
+const postData = async(url = '', data = {}) => {
     const res = await fetch(url, {
         method: 'POST',
         credentials: 'same-origin',
@@ -17,5 +17,5 @@ const postGeo = async(url = '', data = {}) => {
 };
 
 export {
-    postGeo
+    postData
 }

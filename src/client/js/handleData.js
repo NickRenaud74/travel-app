@@ -1,5 +1,4 @@
-import { postWeather } from './weather'
-import { postGeo } from './geonames'
+import { postData } from './postData'
 
 //Function to handle form submit
 const getData = async(event) => {
@@ -20,13 +19,15 @@ const getData = async(event) => {
     };
     calendarCountdown();
 
-
-    postGeo('/geonames', { destination: place })
+    postData('/geonames', { destination: place })
         .then(async(data) => {
-
-            const weather = await postWeather('/weather', {
+            await postData('/weather', {
                 lng: data.geonames[0].lng,
                 lat: data.geonames[0].lat
+            }).then(async(data) => {
+                await postData('/picture', {
+                    location: data.city_name
+                });
             });
         });
 };

@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
+//Country names module to get country codes based on country name
+const countryNames = require('countrynames')
 
 // Configure dotenv to access envrionment variables
 const dotenv = require('dotenv');
@@ -52,12 +54,16 @@ const weatherApi = process.env.weatherApi;
 const picUrl = 'https://pixabay.com/api/?';
 const picApi = process.env.pixApi;
 
-//request to Geonames API with placename
+//request to Geonames API with city, country
 const getCoords = async(req, res) => {
-    const input = req.body.destination;
-    const response = await fetch(`${geoUrl}q=${input}&maxRows=5&username=${username}`);
+    const location = req.body.city;
+    const country = req.body.country;
+    //get country code to use in search query 
+    const countryCode = countryNames.getCode(country);
+    const response = await fetch(`${geoUrl}q=${location}&country=${countryCode}&maxRows=5&username=${username}`);
     try {
         const geoData = await response.json();
+        console.log(geoData);
         res.send(geoData);
     } catch (error) {
         console.log(error);
@@ -104,7 +110,7 @@ const addProjectData = async(req, res) => {
     projectData['city'] = newEntry.city;
     projectData['country'] = newEntry.country;
     projectData['forecast'] = newEntry.forecast;
-    projectData['pictures'] = newEntry.picture;
+    projectData['pictures'] = newEntry.pictures;
     console.log(projectData);
     res.send(projectData);
 };

@@ -3,7 +3,8 @@ import { postData } from './postData'
 //Function to handle form submit
 const getData = async(event) => {
     event.preventDefault();
-    let place = document.getElementById('destination').value;
+    let city = document.getElementById('city').value;
+    let country = document.getElementById('country').value;
     let trip = document.getElementById('date').value;
     console.log(trip);
 
@@ -20,7 +21,10 @@ const getData = async(event) => {
     calendarCountdown();
 
     //request to get destination coordinates
-    const coords = await postData('/geonames', { destination: place });
+    const coords = await postData('/geonames', {
+        city: city,
+        country: country
+    });
 
     //request to get weather forecast
     const weather = await postData('/weather', {
@@ -42,9 +46,22 @@ const getData = async(event) => {
         return pics;
     };
 
+    //extract data from returned weather API to save only necessary data to projectData variable
+    const weatherData = forecast => {
+        let weather = [];
+        for (let day of forecast) {
+            weather.push({
+                max: Math.round(day.max_temp),
+                min: Math.round(day.min_temp),
+                weather: day.weather
+            });
+        };
+        return weather;
+    };
+
     //saving project data
     const project = await postData('/addProjectData', {
-        forecast: weather.data,
+        forecast: weatherData(weather.data),
         city: weather.city_name,
         country: weather.country_code,
         pictures: allPics(picture.hits)

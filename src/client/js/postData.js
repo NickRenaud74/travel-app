@@ -1,4 +1,4 @@
-//Post request to /geonames route on server.js
+//Post request to routes on server.js
 const postData = async(url = '', data = {}) => {
     const res = await fetch(url, {
         method: 'POST',

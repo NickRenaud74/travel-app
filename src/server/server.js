@@ -48,6 +48,10 @@ const username = process.env.geoUsername;
 const weatherUrl = 'http://api.weatherbit.io/v2.0/forecast/daily?';
 const weatherApi = process.env.weatherApi;
 
+//Pixabay API data
+const picUrl = 'https://pixabay.com/api/?';
+const picApi = process.env.pixApi;
+
 //request to Geonames API with placename
 const getCoords = async(req, res) => {
     const input = req.body.destination;
@@ -78,3 +82,18 @@ const getWeather = async(req, res) => {
 };
 
 app.post('/weather', getWeather);
+
+//request to Pixabay API
+const getPic = async(req, res) => {
+    const search = req.body.location;
+    const response = await fetch(`${picUrl}key=${picApi}&q=${search}&image_type=photo`);
+    try {
+        const picData = await response.json();
+        console.log(picData);
+        res.send(picData);
+    } catch (error) {
+        console.log('error: ', error);
+    };
+};
+
+app.post('/picture', getPic);

@@ -7,7 +7,7 @@ const getData = async(event) => {
     let trip = document.getElementById('date').value;
     console.log(trip);
 
-    //Create a countdown from current date to user inputted date
+    //Create a countdown from current date to user input date
     const calendarCountdown = () => {
         let tripDate = new Date(document.getElementById('date').value);
         console.log(tripDate.toUTCString());
@@ -19,18 +19,38 @@ const getData = async(event) => {
     };
     calendarCountdown();
 
-    postData('/geonames', { destination: place })
-        .then(async(data) => {
-            await postData('/weather', {
-                lng: data.geonames[0].lng,
-                lat: data.geonames[0].lat
-            }).then(async(data) => {
-                await postData('/picture', {
-                    location: data.city_name
-                });
-            });
-        });
+    //request to get destination coordinates
+    const coords = await postData('/geonames', { destination: place });
+
+    //request to get weather forecast
+    const weather = await postData('/weather', {
+        lng: coords.geonames[0].lng,
+        lat: coords.geonames[0].lat
+    });
+
+    //to get destination pictures
+    const picture = await postData('/picture', {
+        location: weather.city_name
+    });
+
+    //add picture URL to a list for all returned pictures
+    const allPics = picList => {
+        let pics = [];
+        for (let pic of picList) {
+            pics.push(pic.webformatURL);
+        };
+        return pics;
+    };
+
+    //saving project data
+    const project = await postData('/addProjectData', {
+        forecast: weather.data,
+        city: weather.city_name,
+        country: weather.country_code,
+        pictures: allPics(picture.hits)
+    });
 };
+
 
 //Event listener triggered on submitting form
 document.getElementById('submit').addEventListener('click', getData);

@@ -74,7 +74,7 @@ const getWeather = async(req, res) => {
     const response = await fetch(`${weatherUrl}&lat=${lat}&lon=${lng}&key=${weatherApi}`);
     try {
         const weatherData = await response.json();
-        console.log(weatherData);
+        //console.log(weatherData);
         res.send(weatherData);
     } catch (error) {
         console.log(error);
@@ -86,7 +86,7 @@ app.post('/weather', getWeather);
 //request to Pixabay API
 const getPic = async(req, res) => {
     const search = req.body.location;
-    const response = await fetch(`${picUrl}key=${picApi}&q=${search}&image_type=photo`);
+    const response = await fetch(`${picUrl}key=${picApi}&q=${search}&image_type=photo&per_page=5`);
     try {
         const picData = await response.json();
         console.log(picData);
@@ -97,3 +97,16 @@ const getPic = async(req, res) => {
 };
 
 app.post('/picture', getPic);
+
+//entry to projectData
+const addProjectData = async(req, res) => {
+    let newEntry = req.body;
+    projectData['city'] = newEntry.city;
+    projectData['country'] = newEntry.country;
+    projectData['forecast'] = newEntry.forecast;
+    projectData['pictures'] = newEntry.picture;
+    console.log(projectData);
+    res.send(projectData);
+};
+
+app.post('/addProjectData', addProjectData);

@@ -3,8 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
-//Country names module to get country codes based on country name
-const countryNames = require('countrynames')
 
 // Configure dotenv to access envrionment variables
 const dotenv = require('dotenv');
@@ -54,16 +52,32 @@ const weatherApi = process.env.weatherApi;
 const picUrl = 'https://pixabay.com/api/?';
 const picApi = process.env.pixApi;
 
+
+//REST countries API
+const countryApi = 'https://restcountries.eu/rest/v2/name/';
+
+const getCountry = async(req, res) => {
+    const country = req.body.country;
+    const response = await fetch(`${countryApi}${country}`)
+    try {
+        const countryData = await response.json();
+        //console.log(countryData);
+        res.send(countryData);
+    } catch (error) {
+        console.log('error: ', error);
+    }
+};
+
+app.post('/country', getCountry);
+
 //request to Geonames API with city, country
 const getCoords = async(req, res) => {
     const location = req.body.city;
     const country = req.body.country;
-    //get country code to use in search query 
-    const countryCode = countryNames.getCode(country);
-    const response = await fetch(`${geoUrl}q=${location}&country=${countryCode}&maxRows=5&username=${username}`);
+    const response = await fetch(`${geoUrl}q=${location}&country=${country}&maxRows=5&username=${username}`);
     try {
         const geoData = await response.json();
-        console.log(geoData);
+        //console.log(geoData);
         res.send(geoData);
     } catch (error) {
         console.log(error);
@@ -80,7 +94,7 @@ const getWeather = async(req, res) => {
     const response = await fetch(`${weatherUrl}&lat=${lat}&lon=${lng}&key=${weatherApi}`);
     try {
         const weatherData = await response.json();
-        //console.log(weatherData);
+        console.log(weatherData);
         res.send(weatherData);
     } catch (error) {
         console.log(error);
@@ -95,7 +109,7 @@ const getPic = async(req, res) => {
     const response = await fetch(`${picUrl}key=${picApi}&q=${search}&image_type=photo&per_page=5`);
     try {
         const picData = await response.json();
-        console.log(picData);
+        //console.log(picData);
         res.send(picData);
     } catch (error) {
         console.log('error: ', error);
@@ -111,6 +125,13 @@ const addProjectData = async(req, res) => {
     projectData['country'] = newEntry.country;
     projectData['forecast'] = newEntry.forecast;
     projectData['pictures'] = newEntry.pictures;
+    projectData['capital'] = newEntry.capital;
+    projectData['population'] = newEntry.population;
+    projectData['language'] = newEntry.language;
+    projectData['currency'] = newEntry.currency;
+    projectData['length'] = newEntry.length;
+    projectData['countdown'] = newEntry.countdown;
+    projectData['tripDate'] = newEntry.tripDate;
     console.log(projectData);
     res.send(projectData);
 };

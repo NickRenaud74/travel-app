@@ -3,30 +3,46 @@ import { postData } from './postData'
 //Function to handle form submit
 const getData = async(event) => {
     event.preventDefault();
+
+    //User Input variables
     let city = document.getElementById('city').value;
     let country = document.getElementById('country').value;
-    let trip = document.getElementById('date').value;
-    console.log(trip);
+    let departure = new Date(document.getElementById('depart-date').value);
+    console.log(departure);
+    let returning = new Date(document.getElementById('return-date').value);
+    console.log(returning);
+    //console.log(departure.toUTCString().substring(0, 16));
 
-    //Create a countdown from current date to user input date
-    const calendarCountdown = () => {
-        let tripDate = new Date(document.getElementById('date').value);
-        console.log(tripDate.toUTCString());
-        const date = new Date();
-        const difference = tripDate - date;
-        const daysToTrip = (Math.ceil(difference / (1000 * 60 * 60 * 24)));
-        console.log(difference, daysToTrip);
-        return { daysToTrip, tripDate };
+    //get the difference in days between two date objects
+    const dayDifference = (startDate, endDate) => {
+        const diff = endDate - startDate;
+        //converting milliseconds to days & round to next full day
+        const diffInDays = (Math.ceil(diff / (1000 * 60 * 60 * 24)));
+        return diffInDays
     };
-    calendarCountdown();
 
-    //request to get destination coordinates
-    const coords = await postData('/geonames', {
-        city: city,
+    //calculate length of trip
+    const tripLength = dayDifference(departure, returning);
+    console.log(tripLength);
+
+    //calculate amount of days until trip
+    const today = new Date();
+    console.log(today);
+    const daystoTrip = dayDifference(today, departure);
+    console.log(daystoTrip);
+
+    //request to get country information
+    const countryInfo = await postData('/country', {
         country: country
     });
 
-    //request to get weather forecast
+    //to get destination coordinates
+    const coords = await postData('/geonames', {
+        city: city,
+        country: countryInfo[0].alpha2Code
+    });
+
+    //to get weather forecast
     const weather = await postData('/weather', {
         lng: coords.geonames[0].lng,
         lat: coords.geonames[0].lat
@@ -34,7 +50,7 @@ const getData = async(event) => {
 
     //to get destination pictures
     const picture = await postData('/picture', {
-        location: weather.city_name
+        location: city
     });
 
     //add picture URL to a list for all returned pictures
@@ -63,11 +79,17 @@ const getData = async(event) => {
     const project = await postData('/addProjectData', {
         forecast: weatherData(weather.data),
         city: weather.city_name,
-        country: weather.country_code,
-        pictures: allPics(picture.hits)
+        country: countryInfo[0].name,
+        capital: countryInfo[0].capital,
+        population: countryInfo[0].population,
+        language: countryInfo[0].languages[0].name,
+        currency: countryInfo[0].currencies[0].name,
+        pictures: allPics(picture.hits),
+        length: tripLength,
+        countdown: daystoTrip,
+        tripDate: departure.toUTCString().substring(0, 16)
     });
 };
-
 
 //Event listener triggered on submitting form
 document.getElementById('submit').addEventListener('click', getData);

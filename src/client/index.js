@@ -1,5 +1,7 @@
 import { getData } from './js/handleData';
+import { updateUi } from './js/updateUi';
 
 export {
-    getData
+    getData,
+    updateUi
 }

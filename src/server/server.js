@@ -94,7 +94,6 @@ const getWeather = async(req, res) => {
     const response = await fetch(`${weatherUrl}&lat=${lat}&lon=${lng}&key=${weatherApi}`);
     try {
         const weatherData = await response.json();
-        console.log(weatherData);
         res.send(weatherData);
     } catch (error) {
         console.log(error);

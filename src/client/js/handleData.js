@@ -1,4 +1,5 @@
 import { postData } from './postData'
+import { updateUi } from './updateUi'
 
 //Function to handle form submit
 const getData = async(event) => {
@@ -69,7 +70,8 @@ const getData = async(event) => {
             weather.push({
                 max: Math.round(day.max_temp),
                 min: Math.round(day.min_temp),
-                weather: day.weather
+                weather: day.weather,
+                date: day.valid_date
             });
         };
         return weather;
@@ -87,8 +89,11 @@ const getData = async(event) => {
         pictures: allPics(picture.hits),
         length: tripLength,
         countdown: daystoTrip,
-        tripDate: departure.toUTCString().substring(0, 16)
+        tripDate: departure.toUTCString().substring(0, 16),
+        today: today.toUTCString().substring(0, 16)
     });
+
+    updateUi();
 };
 
 //Event listener triggered on submitting form

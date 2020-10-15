@@ -1,0 +1,58 @@
+$primary-font: 'Open Sans',
+sans-serif;
+body {
+    background-image: url("../../../images/background.jpg");
+    background-size: cover;
+    font-family: $primary-font;
+}
+
+header {
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+#trip {
+    display: flex;
+    padding: 20px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.slides {
+    height: 250px;
+    width: 250px;
+    margin-right: 30px;
+    display: inline-block;
+}
+
+.description {
+    font-weight: bolder;
+    display: inline-block;
+    font-size: 1.1rem;
+}
+
+.forecast {
+    display: block;
+}
+
+.info {
+    display: block;
+}
+
+.info ul {
+    list-style-type: none;
+}
+
+.long-forecast {
+    list-style-type: none;
+    max-width: 500px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.long-forecast li {
+    display: inline-block;
+    padding: 10px 10px;
+}

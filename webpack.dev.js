@@ -8,7 +8,11 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     devServer: {
-        port: 8000
+        port: 3000,
+        proxy: {
+            context: () => true,
+            target: 'http://localhost:8000'
+        }
     },
     output: {
         path: path.join(__dirname, './dist'),
@@ -23,6 +27,10 @@ module.exports = {
             {
                 test: /\.scss$/,
                 loader: ['style-loader', 'css-loader', 'sass-loader']
+            },
+            {
+                test: /\.(png|svg|jpe?g|gif)$/,
+                use: ['file-loader']
             }
         ]
     },

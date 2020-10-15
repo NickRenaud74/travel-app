@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Travel App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -17,24 +18,29 @@
     <!--Form -->
 
     <form action="#">
-        <div>
-            <label for="city">City: </label>
-            <input type="text" id="city" placeholder="city" required>
+        <div class="destination">
+            <div class="dest-city">
+                <label for="city">Destination:</label>
+                <input type="text" id="city" placeholder="CITY" required>
+            </div>
+            <div class="dest-country">
+                <input type="text" id="country" placeholder="COUNTRY" required>
+            </div>
         </div>
-        <div>
-            <label for="country">Country: </label>
-            <input type="text" id="country" placeholder="country" required>
+
+        <div class="dates">
+            <div class="depart">
+                <label for="depart-date">Departure:</label>
+                <input type="date" id="depart-date" required>
+            </div>
+            <div class="return">
+                <label for="return-date">Return:</label>
+                <input type="date" id="return-date" required>
+            </div>
         </div>
-        <div>
-            <label for="depart-date">Departure date: </label>
-            <input type="date" id="depart-date" required>
-        </div>
-        <div>
-            <label for="return-date">Return date: </label>
-            <input type="date" id="return-date" required>
-        </div>
-        <div>
-            <input type="submit" id="submit">
+
+        <div class="button">
+            <input type="submit" id="submit" value="Add Trip">
         </div>
     </form>
 

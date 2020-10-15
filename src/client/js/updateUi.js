@@ -18,13 +18,11 @@ const updateUi = async() => {
     const request = await fetch('/projectData');
     try {
         const projectData = await request.json();
+
+        //create div to hold output
         let trip = document.getElementById('trip');
 
-        const description = document.createElement('div');
-        description.innerHTML =
-            `<p>Your ${projectData.countdown} day trip to ${projectData.city}, ${projectData.country} leaving on ${projectData.tripDate}.</p>`
-        trip.appendChild(description);
-
+        //div to hold picture details
         const display = document.createElement('div');
         display.className = 'display';
 
@@ -41,44 +39,68 @@ const updateUi = async() => {
         };
         display.appendChild(fragment);
         trip.appendChild(display);
-        // Automatic slideshow function
 
+        // Automatic slideshow function
         slideShow();
+
+        //Create a div to hold trip information
+        const tripDetails = document.createElement('div');
+        tripDetails.className = 'details';
+
+        //Description of trip
+        const description = document.createElement('div');
+        description.className = 'description';
+        description.innerHTML =
+            `<p><strong>Your ${projectData.length} day trip to ${projectData.city}, ${projectData.country} leaving on ${projectData.tripDate}.</strong></p>`;
+        tripDetails.appendChild(description);
+
+        //Countdown to trip
+        const countdown = document.createElement('div');
+        countdown.className = 'countdown';
+        countdown.innerHTML = `<p><strong>${projectData.countdown} days away!</strong></p>`;
+        tripDetails.appendChild(countdown);
+
+        //update destination information
+        const info = document.createElement('div');
+        info.className = 'info';
+        info.innerHTML =
+            `<h3><strong>Things to know before you go</strong></h3>
+            <ul>
+            <li><strong>Capital City:</strong> ${projectData.capital}</li>
+            <li><strong>Population of ${projectData.country}:</strong> ${projectData.population}</li>
+            <li><strong>Language spoken:</strong> ${projectData.language}</li>
+            <li><strong>Currency:</strong> ${projectData.currency}</li>
+            </ul>`;
+        tripDetails.appendChild(info);
 
         //Display forecast icon, description and temperatures for today
         const forecast = document.createElement('div');
+        forecast.className = 'forecast';
         if (projectData.countdown <= 7) {
             forecast.innerHTML =
-                `<div class=icon><img src="https://www.weatherbit.io/static/img/icons/${projectData.forecast[0].weather.icon}.png" alt="weather icon"></div>
-                <div class=description>Current weather conditions: ${projectData.forecast[0].weather.description}.
-                <div class=temp><strong>High: </strong>${projectData.forecast[0].max}&degC <strong>Low: </strong>${projectData.forecast[0].min}&degC</div>`
+                `<div class="icon"><img src="https://www.weatherbit.io/static/img/icons/${projectData.forecast[0].weather.icon}.png" alt="weather icon"></div>
+                <div class="conditions"><strong>Current weather conditions:</strong> ${projectData.forecast[0].weather.description}.
+                <div class="temp"><strong>High: </strong>${projectData.forecast[0].max}&degC <strong>Low: </strong>${projectData.forecast[0].min}&degC</div>`
         };
 
+        //Display 16 day forecast if trip is longer than 7 days
         if (projectData.countdown > 7) {
             const longForecast = document.createElement('ul');
+            longForecast.className = 'long-forecast';
             for (let day of projectData.forecast) {
                 const dailyForecast = document.createElement('li');
                 dailyForecast.innerHTML =
-                    `<div class=date>${day.date}</div>
-                    <div class=icon><img src="https://www.weatherbit.io/static/img/icons/${day.weather.icon}.png" alt="weather icon"></div>
-                <div class=description>${day.weather.description}.</div>
-                <div class=temp><strong>High: </strong>${day.max}&degC <strong>Low: </strong>${day.min}&degC</div>`
+                    `<div class="date">${day.date}</div>
+                    <div class="icon"><img src="https://www.weatherbit.io/static/img/icons/${day.weather.icon}.png" alt="weather icon"></div>
+                <div class="conditions">${day.weather.description}.</div>
+                <div class="temp"><strong>High: </strong>${day.max}&degC <strong>Low: </strong>${day.min}&degC</div>`
                 longForecast.appendChild(dailyForecast);
             };
             forecast.appendChild(longForecast);
         }
-        trip.appendChild(forecast);
+        tripDetails.appendChild(forecast);
 
-        const info = document.createElement('div');
-        info.innerHTML =
-            `<h3>Things to know before you go</h3>
-            <ul>
-            <li>Capital City: ${projectData.capital}</li>
-            <li>Population of ${projectData.country}: ${projectData.population}</li>
-            <li>Language spoken: ${projectData.language}</li>
-            <li>Currency: ${projectData.currency}</li>
-            </ul>`;
-        trip.appendChild(info);
+        trip.appendChild(tripDetails);
 
     } catch (error) {
         console.log('error: ', error);

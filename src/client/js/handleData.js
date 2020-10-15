@@ -1,6 +1,7 @@
 import { postData } from './postData'
 import { updateUi } from './updateUi'
 
+
 //Function to handle form submit
 const getData = async(event) => {
     event.preventDefault();
@@ -92,7 +93,6 @@ const getData = async(event) => {
         tripDate: departure.toUTCString().substring(0, 16),
         today: today.toUTCString().substring(0, 16)
     });
-
     updateUi();
 };
 

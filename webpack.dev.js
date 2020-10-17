@@ -16,7 +16,9 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, './dist'),
-        filename: 'bundle.min.js'
+        filename: 'bundle.min.js',
+        libraryTarget: 'var',
+        library: 'Client'
     },
     module: {
         rules: [{

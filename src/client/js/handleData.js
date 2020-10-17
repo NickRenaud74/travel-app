@@ -1,7 +1,3 @@
-import { postData } from './postData'
-import { updateUi } from './updateUi'
-
-
 //Function to handle form submit
 const getData = async(event) => {
     event.preventDefault();
@@ -34,24 +30,24 @@ const getData = async(event) => {
     console.log(daystoTrip);
 
     //request to get country information
-    const countryInfo = await postData('/country', {
+    const countryInfo = await Client.postData('/country', {
         country: country
     });
 
     //to get destination coordinates
-    const coords = await postData('/geonames', {
+    const coords = await Client.postData('/geonames', {
         city: city,
         country: countryInfo[0].alpha2Code
     });
 
     //to get weather forecast
-    const weather = await postData('/weather', {
+    const weather = await Client.postData('/weather', {
         lng: coords.geonames[0].lng,
         lat: coords.geonames[0].lat
     });
 
     //to get destination pictures
-    const picture = await postData('/picture', {
+    const picture = await Client.postData('/picture', {
         location: city
     });
 
@@ -79,7 +75,7 @@ const getData = async(event) => {
     };
 
     //saving project data
-    const project = await postData('/addProjectData', {
+    const project = await Client.postData('/addProjectData', {
         forecast: weatherData(weather.data),
         city: weather.city_name,
         country: countryInfo[0].name,
@@ -93,7 +89,7 @@ const getData = async(event) => {
         tripDate: departure.toUTCString().substring(0, 16),
         today: today.toUTCString().substring(0, 16)
     });
-    updateUi();
+    Client.updateUi();
 };
 
 //Event listener triggered on submitting form

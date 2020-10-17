@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
+const { v4: uuidv4 } = require('uuid');
 
 // Configure dotenv to access envrionment variables
 const dotenv = require('dotenv');
@@ -120,19 +121,31 @@ app.post('/picture', getPic);
 //entry to projectData
 const addProjectData = async(req, res) => {
     let newEntry = req.body;
-    projectData['city'] = newEntry.city;
-    projectData['country'] = newEntry.country;
-    projectData['forecast'] = newEntry.forecast;
-    projectData['pictures'] = newEntry.pictures;
-    projectData['capital'] = newEntry.capital;
-    projectData['population'] = newEntry.population;
-    projectData['language'] = newEntry.language;
-    projectData['currency'] = newEntry.currency;
-    projectData['length'] = newEntry.length;
-    projectData['countdown'] = newEntry.countdown;
-    projectData['tripDate'] = newEntry.tripDate;
+    let currentId = uuidv4();
+    let tripData = {
+        city: newEntry.city,
+        country: newEntry.country,
+        forecast: newEntry.forecast,
+        pictures: newEntry.pictures,
+        capital: newEntry.capital,
+        population: newEntry.population,
+        language: newEntry.language,
+        currency: newEntry.currency,
+        length: newEntry.length,
+        countdown: newEntry.countdown,
+        tripDate: newEntry.tripDate,
+        tripId: currentId
+    };
+    projectData[currentId] = tripData;
+
     console.log(projectData);
     res.send(projectData);
 };
 
 app.post('/addProjectData', addProjectData);
+
+const deleteTrip = async(req, res) => {
+    delete projectData[req.body.id];
+    res.send(projectData);
+};
+app.post('/deleteTrip', deleteTrip);

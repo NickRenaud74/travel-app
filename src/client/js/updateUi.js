@@ -4,6 +4,14 @@ const updateUi = async() => {
     try {
         const projectData = await request.json();
 
+        /* Check if local storage exists
+        let tripsArray = localStorage.getItem("trips") ? JSON.parse(localStorage.getItem("trips")) : [];
+
+        const tripData = () => {
+            let getStorage = localStorage.getItem('trips');
+            return JSON.parse(getStorage.trip);
+        }*/
+
         //create an array to hold all trips added by user
         let allTrips = Object.values(projectData);
 
@@ -40,7 +48,12 @@ const updateUi = async() => {
                 <div class="forecast">${Client.getForecast(dest.countdown, dest.forecast)}</div>
             </div>`
             container.appendChild(trip);
+
+            //tripsArray.push(dest);
+            //localStorage.setItem('trips', JSON.stringify(tripsArray));
+
         });
+        console.log(tripData());
         document.querySelectorAll('.slides').forEach(slide => {
             slide.addEventListener('click', Client.displayModal)
         });

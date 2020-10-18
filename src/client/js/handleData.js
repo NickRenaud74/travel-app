@@ -47,9 +47,16 @@ const getData = async(event) => {
     });
 
     //to get destination pictures
-    const picture = await Client.postData('/picture', {
+    let picture = await Client.postData('/picture', {
         location: city
     });
+
+    //if city search query does not get any picture results, query pixabay with country
+    if (picture.total == 0) {
+        picture = await Client.postData('/picture', {
+            location: country
+        });
+    };
 
     //add picture URL to a list for all returned pictures
     const allPics = picList => {
@@ -89,6 +96,7 @@ const getData = async(event) => {
         tripDate: departure.toUTCString().substring(0, 16),
         today: today.toUTCString().substring(0, 16)
     });
+
     Client.updateUi();
 };
 

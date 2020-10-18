@@ -138,7 +138,7 @@ const addProjectData = async(req, res) => {
     };
     projectData[currentId] = tripData;
 
-    console.log(projectData);
+    //console.log(projectData);
     res.send(projectData);
 };
 

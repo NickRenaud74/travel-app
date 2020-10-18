@@ -5,6 +5,7 @@ const getForecast = (countdown, forecast) => {
         <div class="conditions"><strong>Current weather conditions:</strong> ${forecast[0].weather.description}.
         <div class="temp"><strong>High: </strong>${forecast[0].max}&degC <strong>Low: </strong>${forecast[0].min}&degC</div>`
     };
+    //if trip is longer than 7 days away get the 16 day forecast
     if (countdown > 7) {
         const longForecast = document.createElement('ul');
         longForecast.className = 'long-forecast';

@@ -56,6 +56,7 @@ const deleteTrip = async(event) => {
         id: event.target.id
     });
     const trip = document.getElementById(`${event.target.id}`);
+    localStorage.removeItem(event.target.id);
     trip.remove();
 };
 

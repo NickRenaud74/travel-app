@@ -12,12 +12,12 @@
 
     <!--Header-->
     <header>
-        <h1>Travel Planner</h1>
+        <h1 class="title"><span class="travel">Travel</span> Planner</h1>
     </header>
 
     <!--Form -->
-
     <form action="#">
+        <h1 class="plan">Plan Your Next Adventure</h1>
         <div class="destination">
             <div class="dest-city">
                 <label for="city">Destination:</label>
@@ -31,11 +31,11 @@
         <div class="dates">
             <div class="depart">
                 <label for="depart-date">Departure:</label>
-                <input type="date" id="depart-date" required>
+                <input type="date" id="depart-date" class="date" required>
             </div>
             <div class="return">
                 <label for="return-date">Return:</label>
-                <input type="date" id="return-date" required>
+                <input type="date" id="return-date" class="date" required>
             </div>
         </div>
 
@@ -45,6 +45,7 @@
     </form>
 
     <main class="container"></main>
+    <div class="previous-trips"></div>
 
     <div class="modal" id="image-modal">
         <span class="close">&times;</span>

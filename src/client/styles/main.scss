@@ -1,28 +1,49 @@
 $primary-font: 'Open Sans',
 sans-serif;
 body {
-    background-image: url("../../../images/background.jpg");
+    background-image: url("../../../images/paradise.jpg");
     background-size: cover;
     background-attachment: fixed;
     font-family: $primary-font;
 }
 
-header {
-    font-size: 1.5rem;
-    text-align: center;
+.title {
+    font-size: 2rem;
+    text-align: left;
     padding: 1rem;
+    font-weight: bolder;
+    color: black;
+    text-shadow: 1px 1px 1px rgba($color: cornsilk, $alpha: 0.5);
+}
+
+.travel {
+    color: cornsilk;
+    text-shadow: 5px 5px 5px black;
+}
+
+.my-trips {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bolder;
+    margin: 100px auto;
+    color: black;
+    text-shadow: 1px 1px 1px rgba($color: cornsilk, $alpha: 0.5);
+}
+
+.hide {
+    display: none;
 }
 
 //trip Card styles
 .trip {
     display: flex;
     padding: 25px;
-    margin: auto;
-    margin-bottom: 40px;
+    margin: 150px auto;
     width: 75%;
     justify-content: center;
-    box-shadow: 10px 10px 10px black;
-    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 10px 10px 10px cornsilk;
+    background: rgba($color: black, $alpha: 0.5);
+    color: whitesmoke;
 }
 
 //style for image modal 
@@ -43,7 +64,7 @@ header {
     margin: auto;
     display: block;
     width: auto;
-    height: auto;
+    max-height: 500px;
 }
 
 .close {
@@ -97,6 +118,11 @@ header {
     font-weight: bolder;
     display: inline-block;
     font-size: 1.1rem;
+    margin: 10px;
+}
+
+.countdown {
+    margin: 10px;
 }
 
 //weather forecast styles
@@ -123,4 +149,23 @@ header {
         height: 100px;
         width: 100px;
     }
+}
+
+//delete button
+.delete-trip {
+    display: block;
+    width: auto;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    cursor: pointer;
+    font-family: $primary-font;
+    background: rgba($color: cornsilk, $alpha: 0.6);
+}
+
+.delete-trip:hover {
+    background: cornsilk;
+    opacity: 0.8;
 }

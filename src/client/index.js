@@ -5,6 +5,9 @@ import { getForecast, displayModal, getImages, deleteTrip } from './js/helpers';
 import { formValidation, dateValidation } from './js/formValidation';
 import './styles/main.scss';
 import './styles/form.scss';
+import './styles/tripCard.scss';
+import './styles/images.scss';
+import './styles/media.scss';
 import background from '../../images/paradise.jpg';
 
 

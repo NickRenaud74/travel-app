@@ -3,11 +3,6 @@
     "version": "1.0.0",
     "description": "Travel App to hold information on users travel plans",
     "main": "index.js",
-    "scripts": {
-        "test": "test",
-        "build": "webpack-dev-server --config webpack.dev.js --open",
-        "start": "node src/server/server.js"
-    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/NickRenaud74/travelApp.git"
@@ -19,6 +14,7 @@
     },
     "homepage": "https://github.com/NickRenaud74/travelApp#readme",
     "dependencies": {
+        "babel-jest": "^26.5.2",
         "body-parser": "^1.19.0",
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
@@ -36,10 +32,20 @@
         "css-loader": "^4.3.0",
         "file-loader": "^6.1.1",
         "html-webpack-plugin": "^4.5.0",
+        "jest": "^26.5.3",
+        "mini-css-extract-plugin": "^1.0.0",
         "node-fetch": "^2.6.1",
         "node-sass": "^4.14.1",
+        "optimize-css-assets-webpack-plugin": "^5.0.4",
         "sass-loader": "^10.0.2",
         "style-loader": "^1.2.1",
+        "terser-webpack-plugin": "^5.0.0",
         "webpack-dev-server": "^3.11.0"
+    },
+    "scripts": {
+        "test": "jest",
+        "build-dev": "webpack-dev-server --config webpack.dev.js --open",
+        "build-prod": "webpack --config webpack.prod.js",
+        "start": "node src/server/server.js"
     }
 }

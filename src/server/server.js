@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({
     extended: false
 }))
 
-app.use(express.static('dist'));
+app.use(express.static('./dist'));
 
 // port and server connection
 const port = '8000';

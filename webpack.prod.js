@@ -15,8 +15,7 @@ module.exports = {
         minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})]
     },
     output: {
-        path: path.join(__dirname, './dist'),
-        filename: 'bundle.min.js',
+        publicPath: path.join(__dirname, './dist'),
         libraryTarget: 'var',
         library: 'Client'
     },

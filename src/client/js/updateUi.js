@@ -26,7 +26,8 @@ const updateUi = async(getTrips) => {
             trip.className = 'trip';
             trip.id = `${dest.tripId}`;
             trip.innerHTML = `
-            <div class="display">${Client.getImages(dest.pictures)}
+            <div class="display">
+                ${Client.getImages(dest.pictures)}
                 <div class="info"><h3><strong>Things to know before you go</strong></h3>
                 <ul>
                 <li><strong>Capital City:</strong> ${dest.capital}</li>
@@ -37,10 +38,9 @@ const updateUi = async(getTrips) => {
             </div>
             <div class="details">
                 <div class="description">
-                    <p><strong>Your ${dest.length} day trip to ${dest.city}, ${dest.country} on ${dest.tripDate}.</strong></p>
+                    <p class="overview"><strong>Your ${dest.length} day trip to ${dest.city}, ${dest.country} on ${dest.tripDate}.</strong></p>
                     <div class="countdown"><p><strong>${dest.countdown} ${days} away!</strong></p></div>
                 </div>
-                
                 <div class="btn"><button class="delete-trip" id=${dest.tripId}>Delete Trip</button></div>
                 <div class="forecast">${Client.getForecast(dest.countdown, dest.forecast)}</div>
             </div>`

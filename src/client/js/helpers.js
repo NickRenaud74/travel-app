@@ -58,6 +58,9 @@ const deleteTrip = async(event) => {
     const trip = document.getElementById(`${event.target.id}`);
     localStorage.removeItem(event.target.id);
     trip.remove();
+    //scroll back to top
+    const top = document.querySelector('header');
+    top.scrollIntoView({ behavior: 'smooth' });
 };
 
 export {

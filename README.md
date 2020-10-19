@@ -23,3 +23,7 @@ Technologies used include:
     * `npm run start` to start the server.
     * `npm run test` to run unit tests.
 5. In your browser navigate to http://localhost:8000/ to view app.
+
+### Sources
+images/paradise.jpg - https://www.pexels.com/photo/cottages-in-the-middle-of-beach-753626/
+

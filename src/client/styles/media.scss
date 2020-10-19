@@ -1,0 +1,94 @@
+@media(min-width: 1051px) and (max-width: 1300px) {
+    .long-forecast {
+        max-width: 300px;
+    }
+}
+
+@media(max-width: 1050px) {
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .dates,
+    .destination,
+    .button,
+    #dest-label {
+        display: block;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .dest-city,
+    .dest-country,
+    .depart,
+    .return {
+        display: block;
+        margin: 10px auto;
+    }
+    #submit {
+        width: 100%;
+        margin: 20px auto;
+    }
+    .images {
+        flex-flow: wrap;
+    }
+    .trip {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 75%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-rows: minmax(75px, auto);
+        grid-template-areas: "details" "display";
+        grid-gap: 5px;
+    }
+    .display {
+        grid-area: display;
+        display: block;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        margin: auto;
+    }
+    .details {
+        grid-area: details;
+        display: block;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+    }
+    .description,
+    .countdown,
+    .delete-trip,
+    .forecast,
+    .images,
+    .info {
+        margin: 20px auto;
+        text-align: center;
+    }
+    .description {
+        display: flex;
+        flex-direction: column;
+    }
+    .overview {
+        width: 70%;
+        display: block;
+        margin: auto;
+        overflow-wrap: break-word;
+    }
+    .countdown {
+        display: block;
+    }
+    .long-forecast {
+        max-width: 300px;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
+}

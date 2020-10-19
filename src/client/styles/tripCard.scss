@@ -1,0 +1,77 @@
+@import 'main';
+//trip Card styles
+.trip {
+    display: flex;
+    padding: 25px;
+    margin: 150px auto;
+    width: 75%;
+    justify-content: center;
+    box-shadow: 10px 10px 10px $shadow-color;
+    background: rgba($color: black, $alpha: 0.5);
+    color: $primary-color;
+}
+
+//info on destination 
+.info {
+    display: block;
+    text-align: left;
+    ul {
+        list-style-type: none;
+    }
+}
+
+.description {
+    font-weight: bolder;
+    display: inline-block;
+    font-size: 1.1rem;
+    margin: 10px;
+}
+
+.countdown {
+    margin: 10px;
+}
+
+//weather forecast styles
+.forecast {
+    display: block;
+    margin-top: 30px;
+}
+
+.long-forecast {
+    list-style-type: none;
+    max-width: 500px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.long-forecast li {
+    display: inline-block;
+    padding: 10px 10px;
+}
+
+.icon {
+    img {
+        height: 100px;
+        width: 100px;
+    }
+}
+
+//delete button
+.delete-trip {
+    display: block;
+    width: auto;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 1.2rem;
+    cursor: pointer;
+    font-family: $primary-font;
+    background: $shadow-color;
+}
+
+.delete-trip:hover {
+    background: $primary-color;
+    opacity: 0.8;
+}

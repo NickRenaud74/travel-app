@@ -14,7 +14,6 @@ module.exports = {
         minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})]
     },
     output: {
-        publicPath: path.join(__dirname, './dist'),
         libraryTarget: 'var',
         library: 'Client'
     },
